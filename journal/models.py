@@ -54,9 +54,9 @@ class Grade(models.Model):
 
 class Attendance(models.Model):
     STATUS_CHOICES = [
-        ("present", "Присутствовал"),
-        ("absent", "Отсутствовал"),
-        ("late", "Опоздал"),
+        ("present", "Присутствовал(а)"),
+        ("absent", "Отсутствовал(а)"),
+        ("late", "Опоздал(а)"),
     ]
 
     student = models.ForeignKey(
