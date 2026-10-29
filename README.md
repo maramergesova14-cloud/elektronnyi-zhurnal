@@ -1,125 +1,39 @@
-# Электронный журнал
+# Электронный журнал группы
 
-Учебный проект на Django REST Framework для учёта учеников, школьных предметов, оценок и посещаемости.
+Учебный проект на Django REST Framework для учёта студентов, учебных предметов, оценок и посещаемости.
 
-## Возможности
+## Модули
+- `apps/accounts` — JWT-авторизация и пользователи.
+- `apps/students` — студенты и группы.
+- `apps/catalog` — учебные предметы.
+- `apps/journal` — оценки и посещаемость.
+- `apps/reports` — сводный и индивидуальный отчёты.
+- `config` — настройки Django и URL-маршруты.
 
-- список и управление учениками;
-- список и управление предметами;
-- добавление оценок ученикам;
-- учёт посещаемости;
-- REST API с операциями GET, POST, PATCH и DELETE;
-- административная панель Django.
-
-## Технологии
-
-- Python
-- Django
-- Django REST Framework
-- PostgreSQL (или SQLite для быстрого локального запуска)
-
-## Запуск проекта
-
-1. Установи Python 3.11 или новее.
-2. Создай виртуальное окружение:
-
-   ```bash
-   python -m venv venv
-   ```
-
-   Windows: `venv\\Scripts\\activate`
-
-   macOS/Linux: `source venv/bin/activate`
-
-3. Установи зависимости:
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. Если PostgreSQL ещё не настроен, можно запустить проект на SQLite: не задавай переменную `POSTGRES_DB`. Для PostgreSQL скопируй `.env.example` в `.env`, заполни параметры базы и экспортируй переменные окружения перед запуском.
-5. Создай таблицы и администратора:
-
-   ```bash
-   python manage.py makemigrations journal
-   python manage.py migrate
-   python manage.py createsuperuser
-   ```
-
-6. Запусти сервер:
-
-   ```bash
-   python manage.py runserver
-   ```
-
-API: http://127.0.0.1:8000/api/  
-Административная панель: http://127.0.0.1:8000/admin/
-
-## API endpoints
-
-| Метод | URL | Назначение |
-|---|---|---|
-| GET | `/api/students/` | Получить список учеников |
-| POST | `/api/students/` | Добавить ученика |
-| GET | `/api/students/1/` | Получить ученика по ID |
-| PATCH | `/api/students/1/` | Изменить часть данных ученика |
-| DELETE | `/api/students/1/` | Удалить ученика |
-| GET / POST | `/api/subjects/` | Просмотр и добавление предметов |
-| GET / POST | `/api/grades/` | Просмотр и добавление оценок |
-| GET / POST | `/api/attendance/` | Просмотр и добавление посещаемости |
-
-Все ресурсы также поддерживают изменение и удаление отдельной записи.
-
-## Примеры API Requests
-
-Для примеров используется Postman или другое приложение для отправки HTTP-запросов. Базовый адрес: `http://127.0.0.1:8000`.
-
-### 1. GET — получить учеников
-
-- Method: `GET`
-- URL: `http://127.0.0.1:8000/api/students/`
-
-### 2. POST — добавить ученика
-
-- Method: `POST`
-- URL: `http://127.0.0.1:8000/api/students/`
-- Body → raw → JSON:
-
-```json
-{
-  "first_name": "Анна",
-  "last_name": "Иванова",
-  "class_name": "9А",
-  "email": "anna@example.com"
-}
+## Запуск в Windows PowerShell
+```powershell
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+Copy-Item .env.example .env
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
 ```
 
-### 3. PATCH — изменить класс ученика
+Проверка сервера: http://127.0.0.1:8000/  
+Админ-панель: http://127.0.0.1:8000/admin/
 
-- Method: `PATCH`
-- URL: `http://127.0.0.1:8000/api/students/1/`
-- Body → raw → JSON:
+## API
+- `POST /api/auth/token/` — получить JWT по username/password.
+- `POST /api/auth/token/refresh/` — обновить токен.
+- `GET /api/auth/me/` — текущий пользователь.
+- `/api/students/` — CRUD студентов.
+- `/api/subjects/` — CRUD предметов.
+- `/api/journal/grades/` — оценки.
+- `/api/journal/attendance/` — посещаемость.
+- `GET /api/reports/summary/` — сводная статистика.
+- `GET /api/reports/students/<id>/` — отчёт студента.
 
-```json
-{
-  "class_name": "9Б"
-}
-```
-
-### 4. DELETE — удалить ученика
-
-- Method: `DELETE`
-- URL: `http://127.0.0.1:8000/api/students/1/`
-
-Для POST/PATCH выбери `Content-Type: application/json`. Авторизация в этом учебном варианте не настроена; токены не используются.
-
-## Структура проекта
-
-```text
-config/       настройки и URL проекта
-journal/      модели, сериализаторы, представления и маршруты API
-manage.py     команды Django
-requirements.txt
-.env.example
-README.md
-```
+API требует JWT или сессионную авторизацию. Для API-запросов передавай заголовок `Authorization: Bearer <access>`.
