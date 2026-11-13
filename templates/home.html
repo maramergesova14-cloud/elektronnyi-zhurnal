@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Электронный журнал</title>
+<style>
+:root{--navy:#172554;--blue:#2563eb;--cyan:#dbeafe;--bg:#f4f7fb;--ink:#172033;--muted:#64748b}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:linear-gradient(120deg,#172554,#1d4ed8);color:white;padding:30px max(6vw,24px)}
+header .tag{font-size:12px;letter-spacing:2px;text-transform:uppercase;opacity:.8}
+h1{font-size:clamp(28px,4vw,42px);margin:12px 0 8px}.sub{color:#dbeafe;max-width:700px;line-height:1.6}
+main{max-width:1100px;margin:32px auto;padding:0 22px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{background:white;border:1px solid #e2e8f0;border-radius:16px;padding:22px;box-shadow:0 6px 20px #0f172a0b}
+.icon{width:42px;height:42px;border-radius:12px;background:#eff6ff;color:#1d4ed8;display:grid;place-items:center;font-size:20px}
+h2{font-size:18px;margin:16px 0 8px}.card p{color:var(--muted);line-height:1.5;font-size:14px}
+a{color:#1d4ed8;text-decoration:none;font-weight:600}.links{display:flex;gap:18px;flex-wrap:wrap;margin-top:26px}
+footer{max-width:1100px;margin:35px auto;padding:0 22px;color:var(--muted);font-size:13px}
+</style></head>
+<body>
+<header><div class="tag">Информационная система учебного процесса</div><h1>Электронный журнал</h1>
+<div class="sub">Единое пространство для учёта учеников, учебных предметов, уроков, оценок и посещаемости.</div></header>
+<main>
+<div class="grid">
+<section class="card"><div class="icon">👤</div><h2>Пользователи</h2><p>Учётные записи сотрудников и участников образовательного процесса, разграничение ролей.</p></section>
+<section class="card"><div class="icon">📚</div><h2>Учебный каталог</h2><p>Учебные годы, классы и дисциплины, используемые в расписании.</p></section>
+<section class="card"><div class="icon">🎓</div><h2>Ученики</h2><p>Карточки учеников, принадлежность к классу и контактные данные представителей.</p></section>
+<section class="card"><div class="icon">📝</div><h2>Уроки и оценки</h2><p>Темы уроков, домашние задания, текущая успеваемость и посещаемость.</p></section>
+<section class="card"><div class="icon">📊</div><h2>Отчёты</h2><p>Сводные показатели успеваемости и посещаемости для анализа учебного процесса.</p></section>
+</div>
+<div class="links"><a href="/admin/">Открыть панель администратора →</a><a href="/api/">Перейти к API →</a><a href="/api/reports/summary/">Сводный отчёт JSON →</a></div>
+</main><footer>Учебный проект · Django + PostgreSQL · 5 модулей</footer>
+</body></html>
